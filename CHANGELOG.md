@@ -1,5 +1,31 @@
 # Changelog
 
+## Version 0.0.5
+
+- Added basic functionality to create ClassDiagrams
+- Following new functions: 'New-MermaidClass','New-MermaidClassDiagram','New-MermaidClassMethod','New-MermaidClassProperty','New-MermaidClassRelationShip' created
+
+```mermaid
+classDiagram
+class Animal{
+        +int age
+        +String Gender
+        +isMammal()
+        +mate()
+}
+class Fish{
+        -int sizeInFeet
+        -canEat()
+}
+class Duck{
+        +string beackColor
+        +swim()
+        +quack()
+}
+Animal <|-- Duck
+Animal <|-- Fish
+```
+
 ## Version 0.0.4
 
 ### Changes

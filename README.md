@@ -5,18 +5,19 @@ A large list with examples you can find [here](https://github.com/HCRitter/PSMer
 
 ## Changelog
 
-Version 0.0.3
+Version 0.0.5
 
 ### Changes
 
-- Added functionality to 'New-MermaidLink' to generate Bidirectional links, added new arrow types (Arrow, Dot and Cross).
-  
-```mermaid
-flowchart LR
-    A o-.-o|Example| B
-    C x-.-x|Example| D
-    E <.->|Example| F
-```
+- Added basic functionality to create ClassDiagrams
+- Following new functions: 'New-MermaidClass','New-MermaidClassDiagram','New-MermaidClassMethod','New-MermaidClassProperty','New-MermaidClassRelationShip' created
+
+Version 0.0.4
+
+### Changes
+
+- Added function 'New-MermaidClassDefinition' to create class definitions to MermaidNodes
+- Updated parameter from 'New-MermaidGraph' to accept ClassDefinitions
 
 ## Examples
 
@@ -51,15 +52,6 @@ New-MermaidGraph -Direction LR -NodeConnections @(
 ) -ClassDefinitions @(
     New-MermaidClassDefinition -Name "Starter" -FillColor "#6699ff" -StrokeColor "#999966"
 )
-<# Outpout:
-```mermaid
-graph LR
-        ID1("Frankfurt am Main"):::Starter---x|traveling to:|ID2(((PSConfEU2024)))
-        ID2(((PSConfEU2024)))<.->ID3[[Enjoying for 4 Days]]
-        ID2(((PSConfEU2024)))---o|traveling home:|ID1(Frankfurt am Main)
-        classDef Starter fill:#6699ff,stroke:#999966,stroke-width:2px
-```mermaid
-#>
 ```
 
 ```mermaid
@@ -68,4 +60,153 @@ graph LR
         ID2(((PSConfEU2024)))<.->ID3[[Enjoying for 4 Days]]
         ID2(((PSConfEU2024)))---o|traveling home:|ID1(Frankfurt am Main)
         classDef Starter fill:#6699ff,stroke:#999966,stroke-width:2px
+```
+
+### Creating a classDiagram in one big step
+
+```powershell
+$newMermaidClassDiagramSplat = @{
+    Class = @(
+        $(
+            $newMermaidClassSplat = @{
+                Name = 'Animal'
+                property = @(
+                    $(
+                        $newmermaidclasspropertySplat = @{
+                            Accessability = 'Public'
+                            Name = 'age'
+                            Datatype = 'int'
+                        }
+                        new-mermaidclassproperty @newmermaidclasspropertySplat
+                    ),
+                    $(
+                        $newmermaidclasspropertySplat = @{
+                            Accessability = 'Public'
+                            Name = 'Gender'
+                            Datatype = 'String'
+                        }
+                        new-mermaidclassproperty @newmermaidclasspropertySplat
+                    )
+                )
+                Method = @(
+                    $(
+                        $newMermaidClassMethodSplat = @{
+                            Encapsulation = 'Public'
+                            Name = 'isMammal'
+                        }
+                        New-MermaidClassMethod @newMermaidClassMethodSplat 
+                    ),
+                    $(
+                        $newMermaidClassMethodSplat = @{
+                            Encapsulation = 'Public'
+                            Name = 'mate'
+                        }
+                        New-MermaidClassMethod @newMermaidClassMethodSplat
+                    )
+                )
+            }
+            New-MermaidClass @newMermaidClassSplat
+        ),
+        $(
+            $newMermaidClassSplat = @{
+                Name = 'Fish'
+                property = @(
+                    $(
+                        $newmermaidclasspropertySplat = @{
+                            Accessability = 'Private'
+                            Name = 'sizeInFeet'
+                            Datatype = 'int'
+                        }
+                        new-mermaidclassproperty @newmermaidclasspropertySplat
+                    )
+                )
+                Method = @(
+                    $(
+                        $newMermaidClassMethodSplat = @{
+                            Encapsulation = 'Private'
+                            Name = 'canEat'
+                        }
+                        New-MermaidClassMethod @newMermaidClassMethodSplat 
+                    )
+                )
+            }
+            New-MermaidClass @newMermaidClassSplat
+        ),
+        $(
+            $newMermaidClassSplat = @{
+                Name = 'Duck'
+                property = @(
+                    $(
+                        $newmermaidclasspropertySplat = @{
+                            Accessability = 'Public'
+                            Name = 'beackColor'
+                            Datatype = 'string'
+                        }
+                        new-mermaidclassproperty @newmermaidclasspropertySplat
+                    )
+                )
+                Method = @(
+                    $(
+                        $newMermaidClassMethodSplat = @{
+                            Encapsulation = 'Public'
+                            Name = 'swim'
+                        }
+                        New-MermaidClassMethod @newMermaidClassMethodSplat 
+                    ),
+                    $(
+                        $newMermaidClassMethodSplat = @{
+                            Encapsulation = 'Public'
+                            Name = 'quack'
+                        }
+                        New-MermaidClassMethod @newMermaidClassMethodSplat
+                    )
+                )
+            }
+            New-MermaidClass @newMermaidClassSplat
+        )
+    )
+    RelationShip = @(
+        $(
+            $newMermaidClassRelationShipSplat = @{
+                RelationShipType = 'Inheritance'
+                FirstClass = 'Animal'
+                SecondClass = 'Duck'
+            }
+
+            New-MermaidClassRelationShip @newMermaidClassRelationShipSplat
+        ),
+        $(
+            $newMermaidClassRelationShipSplat = @{
+                RelationShipType = 'Inheritance'
+                FirstClass = 'Animal'
+                SecondClass = 'Fish'
+            }
+
+            New-MermaidClassRelationShip @newMermaidClassRelationShipSplat
+        )
+    )
+}
+
+New-MermaidClassDiagram @newMermaidClassDiagramSplat
+```
+
+```mermaid
+classDiagram
+class Animal{
+        +int age
+        +String Gender
+        +isMammal()
+        +mate()
+}
+class Fish{
+        -int sizeInFeet
+        -canEat()
+}
+class Duck{
+        +string beackColor
+        +swim()
+        +quack()
+}
+Animal <|-- Duck
+Animal <|-- Fish
 ```

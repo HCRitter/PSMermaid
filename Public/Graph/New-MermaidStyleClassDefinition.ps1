@@ -1,4 +1,4 @@
-function New-MermaidClassDefinition {
+function New-MermaidStyleClassDefinition {
     [CmdletBinding()]
     param (
         $Name,
