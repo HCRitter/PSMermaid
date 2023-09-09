@@ -4,7 +4,8 @@ function New-MermaidGraph {
         [ValidateSet("TB","TD","BT","RL","LR")]
         $Direction,
         [PSCustomObject[]] $NodeConnections,
-        [switch] $Append
+        [switch] $Append,
+        [string[]] $ClassDefinitions
     )
     
     begin {
@@ -14,9 +15,11 @@ function New-MermaidGraph {
     
     process {
         $Output.AppendLine("graph $Direction") | Out-Null
-        #$Output.AppendLine("`tStart --> Stop") | Out-Null
         foreach($NodeConnection in $NodeConnections){
             $Output.AppendLine("`t$NodeConnection") | Out-Null
+        }
+        foreach($ClassDefinition in $ClassDefinitions){
+            $output.AppendLine("`t$ClassDefinition") | Out-Null
         }
     }
     

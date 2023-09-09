@@ -27,7 +27,8 @@ function New-MermaidNode {
         [ValidateSet([Shape],ErrorMessage="Value '{0}' is invalid. Try one of: {1}")]
         $Shape,
         $ID,
-        $Text
+        $Text,
+        $Class = $null
     )
     
     begin {
@@ -39,8 +40,13 @@ function New-MermaidNode {
     }
     
     process {
+        if(-not ([string]::IsNullOrEmpty($Class))){
+            $Text = "`"$($Text)`""
+            $ReturnString = "$ID$($SelectedShape.Replace('TEXT',$Text)):::$Class"
+        }else {
+            $ReturnString = "{0}{1}" -f $ID, $SelectedShape.Replace('TEXT',$Text)
+        }
         
-        $ReturnString = "{0}{1}" -f $ID, $SelectedShape.Replace('TEXT',$Text)
     }
     
     end {
