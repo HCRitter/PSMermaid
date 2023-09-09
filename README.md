@@ -1,7 +1,7 @@
 # PSMermaid
 
 Easily Create Mermaid Markdown Files in PowerShell
-A large list with examples you can find [here](https://github.com/HCRitter/PSMermaid/EXAMPLES.md), the full changelog you can find [here](https://github.com/HCRitter/PSMermaid/CHANGELOG.md).
+A large list with examples you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/EXAMPLES.md), the full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/CHANGELOG.md).
 
 ## Changelog
 
