@@ -37,19 +37,19 @@ $Link = New-MermaidLink -Text "traveling to:" -Linktype ArrowLink
 
 ```mermaid
 graph LR
-    -->|traveling to:|
+    A-->|traveling to:|B
 ```
 
 ### Creating a Connection
 
 ```powershell
 $Connection = New-MermaidNodeConnection -FirstNode $Node1 -SecondNode $Node2 -Link $Link
-#   Output: ID1/Frankfurt am Main/-->|traveling to:|ID2(((PSConfEU2024)))
+#   Output: ID1[/Frankfurt am Main/]-->|traveling to:|ID2(((PSConfEU2024)))
 ```
 
 ```mermaid
 graph LR
-    ID1/Frankfurt am Main/-->|traveling to:|ID2(((PSConfEU2024)))
+    ID1[/Frankfurt am Main/]-->|traveling to:|ID2(((PSConfEU2024)))
 ```
 
 ### Creating a Graph
