@@ -1,4 +1,4 @@
-function New-MermaidNodeConnection {
+function New-MermaidGraphNodeConnection {
     [CmdletBinding()]
     param (
         $FirstNode,

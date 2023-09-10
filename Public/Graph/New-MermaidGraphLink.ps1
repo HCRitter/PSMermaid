@@ -21,7 +21,7 @@ class ArrowType : System.Management.Automation.IValidateSetValuesGenerator {
 }
 
 
-function New-MermaidLink {
+function New-MermaidGraphLink {
     [CmdletBinding()]
     param (
         $Text ='',

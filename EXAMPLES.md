@@ -3,7 +3,7 @@
 ## Creating a Node
 
 ```powershell
-$Node1 = New-MermaidNode -Shape Parallelogram -ID ID1 -Text "Frankfurt am Main"
+$Node1 = New-MermaidGraphNode -Shape Parallelogram -ID ID1 -Text "Frankfurt am Main"
 #   Output: ID1[/Frankfurt am Main/]
 ```
 
@@ -15,7 +15,7 @@ graph LR
 ## Creating another Node
 
 ```powershell
-$Node2 = New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)"
+$Node2 = New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)"
 #   Output: ID2(((PSConfEU2024)))
 ```
 
@@ -27,7 +27,7 @@ graph LR
 ## Creating a Link
 
 ```powershell
-$Link = New-MermaidLink -Text "traveling to:" -Linktype ArrowLink
+$Link = New-MermaidGraphLink -Text "traveling to:" -Linktype ArrowLink
 #   Output: -->|traveling to:|
 ```
 
@@ -39,7 +39,7 @@ graph LR
 ## Creating a Connection
 
 ```powershell
-$Connection = New-MermaidNodeConnection -FirstNode $Node1 -SecondNode $Node2 -Link $Link
+$Connection = New-MermaidGraphNodeConnection -FirstNode $Node1 -SecondNode $Node2 -Link $Link
 #   Output: ID1[/Frankfurt am Main/]-->|traveling to:|ID2(((PSConfEU2024)))
 ```
 
@@ -71,27 +71,27 @@ graph LR
 New-MermaidGraph -Direction LR -NodeConnections @(
     $(
         $newMermaidNodeConnectionSplat = @{
-            FirstNode = $(New-MermaidNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main")
-            SecondNode = $(New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
-            Link = $(New-MermaidLink -Text "traveling to:" -Linktype ArrowLink)
+            FirstNode = $(New-MermaidGraphNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main")
+            SecondNode = $(New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
+            Link = $(New-MermaidGraphLink -Text "traveling to:" -Linktype ArrowLink)
         }
-        New-MermaidNodeConnection @newMermaidNodeConnectionSplat
+        New-MermaidGraphNodeConnection @newMermaidNodeConnectionSplat
     ),
     $(
         $newMermaidNodeConnectionSplat = @{
-            FirstNode = $(New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
-            SecondNode = $(New-MermaidNode -Shape subroutine -ID ID3 -Text "Enjoying for 4 Days")
-            Link = $(New-MermaidLink -Linktype DottedLink)
+            FirstNode = $(New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
+            SecondNode = $(New-MermaidGraphNode -Shape subroutine -ID ID3 -Text "Enjoying for 4 Days")
+            Link = $(New-MermaidGraphLink -Linktype DottedLink)
         }
-        New-MermaidNodeConnection @newMermaidNodeConnectionSplat
+        New-MermaidGraphNodeConnection @newMermaidNodeConnectionSplat
     ),
     $(
         $newMermaidNodeConnectionSplat = @{
-            FirstNode = $(New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
-            SecondNode = $(New-MermaidNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main")
-            Link = $(New-MermaidLink -Text "traveling home:" -Linktype ArrowLink)
+            FirstNode = $(New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
+            SecondNode = $(New-MermaidGraphNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main")
+            Link = $(New-MermaidGraphLink -Text "traveling home:" -Linktype ArrowLink)
         }
-        New-MermaidNodeConnection @newMermaidNodeConnectionSplat
+        New-MermaidGraphNodeConnection @newMermaidNodeConnectionSplat
     )
 )
 <# Outpout:

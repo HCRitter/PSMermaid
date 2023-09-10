@@ -37,7 +37,7 @@ Animal <|-- Fish
 
 ### Changes
 
-- Added functionality to 'New-MermaidLink' to generate Bidirectional links, added new arrow types (Arrow, Dot and Cross).
+- Added functionality to 'New-MermaidGraphLink' to generate Bidirectional links, added new arrow types (Arrow, Dot and Cross).
   
 ```mermaid
 flowchart LR

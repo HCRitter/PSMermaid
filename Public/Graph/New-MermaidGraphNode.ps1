@@ -21,7 +21,7 @@ class Shape : System.Management.Automation.IValidateSetValuesGenerator {
 
 
 
-function New-MermaidNode {
+function New-MermaidGraphNode {
     [CmdletBinding()]
     param (
         [ValidateSet([Shape],ErrorMessage="Value '{0}' is invalid. Try one of: {1}")]
