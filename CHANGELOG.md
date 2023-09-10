@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 0.0.6
+
+- Added basic functionality to create a 'userjourney'
+- Following new functions: 'New-MermaidJourney','New-MermaidJourneySection','New-MermaidJourneyTask' created
+
+```mermaid
+journey
+        title My working day
+        section Go to work
+                Make teak: 5: Me
+                Go upstairs: 3: Me
+                Do work: 1: Me, Cat
+
+        section Go home
+                Go downstairs: 5: Me
+                Sit down: 5: Me
+```
+
 ## Version 0.0.5
 
 - Added basic functionality to create ClassDiagrams

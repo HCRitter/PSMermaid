@@ -1,23 +1,38 @@
 # PSMermaid
 
 Easily Create Mermaid Markdown Files in PowerShell
-A large list with examples you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/EXAMPLES.md), the full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/CHANGELOG.md).
+A large list with examples you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/EXAMPLES.md).
+The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/CHANGELOG.md).
+
+## Implementation overview
+
+- [x] Graph / FlowChart
+- [x] Class Diagram
+- [x] User Journey
+- [ ] Sequence Diagram
+- [ ] State Diagram
+- [ ] Entity Relationship Diagrams
+- [ ] Beta Testing
+- [ ] Gantt
+- [ ] Pie Chart
+- [ ] Quadrant Chart
+- [ ] Requirement Diagram
 
 ## Changelog
 
-Version 0.0.5
+### Version 0.0.6
 
-### Changes
+#### Changes
+
+- Added basic functionality to create a 'userjourney'
+- Following new functions: 'New-MermaidJourney','New-MermaidJourneySection','New-MermaidJourneyTask' created
+  
+### Version 0.0.5
+
+#### Changes
 
 - Added basic functionality to create ClassDiagrams
 - Following new functions: 'New-MermaidClass','New-MermaidClassDiagram','New-MermaidClassMethod','New-MermaidClassProperty','New-MermaidClassRelationShip' created
-
-Version 0.0.4
-
-### Changes
-
-- Added function 'New-MermaidClassDefinition' to create class definitions to MermaidNodes
-- Updated parameter from 'New-MermaidGraph' to accept ClassDefinitions
 
 ## Examples
 
@@ -27,30 +42,30 @@ Version 0.0.4
 New-MermaidGraph -Direction LR -NodeConnections @(
     $(
         $newMermaidNodeConnectionSplat = @{
-            FirstNode = $(New-MermaidNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main" -Class "Starter")
-            SecondNode = $(New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
-            Link = $(New-MermaidLink -Text "traveling to:" -Linktype Link -ArrowType Cross) 
+            FirstNode = $(New-MermaidGraphNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main" -Class "Starter")
+            SecondNode = $(New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
+            Link = $(New-MermaidGraphLink -Text "traveling to:" -Linktype Link -ArrowType Cross) 
         }
-        New-MermaidNodeConnection @newMermaidNodeConnectionSplat
+        New-MermaidGraphNodeConnection @newMermaidNodeConnectionSplat
     ),
     $(
         $newMermaidNodeConnectionSplat = @{
-            FirstNode = $(New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
-            SecondNode = $(New-MermaidNode -Shape subroutine -ID ID3 -Text "Enjoying for 4 Days")
-            Link = $(New-MermaidLink -Linktype Dotted -ArrowType Arrow -BiDirectional)
+            FirstNode = $(New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
+            SecondNode = $(New-MermaidGraphNode -Shape subroutine -ID ID3 -Text "Enjoying for 4 Days")
+            Link = $(New-MermaidGraphLink -Linktype Dotted -ArrowType Arrow -BiDirectional)
         }
-        New-MermaidNodeConnection @newMermaidNodeConnectionSplat
+        New-MermaidGraphNodeConnection @newMermaidNodeConnectionSplat
     ),
     $(
         $newMermaidNodeConnectionSplat = @{
-            FirstNode = $(New-MermaidNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
-            SecondNode = $(New-MermaidNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main")
-            Link = $(New-MermaidLink -Text "traveling home:" -Linktype Link -ArrowType Dot)
+            FirstNode = $(New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)")
+            SecondNode = $(New-MermaidGraphNode -Shape RoundEdges -ID ID1 -Text "Frankfurt am Main")
+            Link = $(New-MermaidGraphLink -Text "traveling home:" -Linktype Link -ArrowType Dot)
         }
-        New-MermaidNodeConnection @newMermaidNodeConnectionSplat
+        New-MermaidGraphNodeConnection @newMermaidNodeConnectionSplat
     )
 ) -ClassDefinitions @(
-    New-MermaidClassDefinition -Name "Starter" -FillColor "#6699ff" -StrokeColor "#999966"
+    New-MermaidGraphStyleClassDefinition -Name "Starter" -FillColor "#6699ff" -StrokeColor "#999966"
 )
 ```
 
@@ -209,4 +224,47 @@ class Duck{
 }
 Animal <|-- Duck
 Animal <|-- Fish
+```
+
+### Creating a UserJourney in one big step
+
+```powershell
+New-MermaidJourney -Title "My working day" -Section @(
+    $(
+        New-MermaidJourneySection -Title "Go to work" -Task @(
+            $(
+                New-MermaidJourneyTask -Name "Make teak" -Score 5 -Actor @("Me")
+            ),
+            $(
+                New-MermaidJourneyTask -Name "Go upstairs" -Score 3 -Actor @("Me")
+            ),
+            $(
+                New-MermaidJourneyTask -Name "Do work" -Score 1 -Actor @("Me, Cat")
+            )
+        )
+    ),
+    $(
+        New-MermaidJourneySection -Title "Go home" -Task @(
+            $(
+                New-MermaidJourneyTask -Name "Go downstairs" -Score 5 -Actor @("Me")
+            ),
+            $(
+                New-MermaidJourneyTask -Name "Sit down" -Score 5 -Actor @("Me")
+            )
+        )
+    )
+)
+```
+
+```mermaid
+journey
+        title My working day
+        section Go to work
+                Make teak: 5: Me
+                Go upstairs: 3: Me
+                Do work: 1: Me, Cat
+
+        section Go home
+                Go downstairs: 5: Me
+                Sit down: 5: Me
 ```

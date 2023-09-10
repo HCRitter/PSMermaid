@@ -1,3 +1,5 @@
+
+# Create a complex graph / workflow
 New-MermaidGraph -Direction LR -NodeConnections @(
     $(
         $newMermaidNodeConnectionSplat = @{
@@ -27,7 +29,7 @@ New-MermaidGraph -Direction LR -NodeConnections @(
     New-MermaidGraphStyleClassDefinition -Name "Starter" -FillColor "#6699ff" -StrokeColor "#999966"
 )
 
-
+# Create a complex class diagram
 $newMermaidClassDiagramSplat = @{
     Class = @(
         $(
@@ -151,3 +153,30 @@ $newMermaidClassDiagramSplat = @{
 }
 
 New-MermaidClassDiagram @newMermaidClassDiagramSplat
+
+# Create a UserJourney
+New-MermaidJourney -Title "My working day" -Section @(
+    $(
+        New-MermaidJourneySection -Title "Go to work" -Task @(
+            $(
+                New-MermaidJourneyTask -Name "Make teak" -Score 5 -Actor @("Me")
+            ),
+            $(
+                New-MermaidJourneyTask -Name "Go upstairs" -Score 3 -Actor @("Me")
+            ),
+            $(
+                New-MermaidJourneyTask -Name "Do work" -Score 1 -Actor @("Me, Cat")
+            )
+        )
+    ),
+    $(
+        New-MermaidJourneySection -Title "Go home" -Task @(
+            $(
+                New-MermaidJourneyTask -Name "Go downstairs" -Score 5 -Actor @("Me")
+            ),
+            $(
+                New-MermaidJourneyTask -Name "Sit down" -Score 5 -Actor @("Me")
+            )
+        )
+    )
+)

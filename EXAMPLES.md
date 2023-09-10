@@ -1,6 +1,8 @@
 # Examples
 
-## Creating a Node
+## Graph/Workflow
+
+### Creating a Node
 
 ```powershell
 $Node1 = New-MermaidGraphNode -Shape Parallelogram -ID ID1 -Text "Frankfurt am Main"
@@ -12,7 +14,7 @@ graph LR
     ID1[/Frankfurt am Main/]
 ```
 
-## Creating another Node
+### Creating another Node
 
 ```powershell
 $Node2 = New-MermaidGraphNode -Shape DoubleCircle -ID ID2 -Text "PSConfEU$((Get-Date).Year +1)"
@@ -24,7 +26,7 @@ graph LR
     ID2(((PSConfEU2024)))
 ```
 
-## Creating a Link
+### Creating a Link
 
 ```powershell
 $Link = New-MermaidGraphLink -Text "traveling to:" -Linktype ArrowLink
@@ -36,7 +38,7 @@ graph LR
     A-->|traveling to:|B
 ```
 
-## Creating a Connection
+### Creating a Connection
 
 ```powershell
 $Connection = New-MermaidGraphNodeConnection -FirstNode $Node1 -SecondNode $Node2 -Link $Link
@@ -48,7 +50,7 @@ graph LR
     ID1[/Frankfurt am Main/]-->|traveling to:|ID2(((PSConfEU2024)))
 ```
 
-## Creating a Graph
+### Creating a Graph
 
 ```powershell
 $Graph = New-MermaidGraph -Direction LR -NodeConnections $Connection
@@ -65,7 +67,7 @@ graph LR
         ID1[/Frankfurt am Main/]-->|traveling to:|ID2(((PSConfEU2024)))
 ```
 
-## Creating another Graph in one big step
+### Creating another Graph in one big step
 
 ```powershell
 New-MermaidGraph -Direction LR -NodeConnections @(
