@@ -1,5 +1,7 @@
 # PSMermaid
 
+![PSMermaidLogo](PSMermaidLogo.png)
+
 Easily Create Mermaid Markdown Files in PowerShell
 
 A large list with examples you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/EXAMPLES.md).
