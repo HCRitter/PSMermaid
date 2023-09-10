@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 0.0.7
+
+- Added basic functionality to create a 'pie chart'
+- Following new functions: 'New-MermaidPie','New-MermaidPieDataSet' created
+
+```mermaid
+%%{init: {"pie": {"textPosition": 0.5}, "themeVariables": {"pieOuterStrokeWidth": "5px"}} }%%
+pie showData
+        title Key elements in Product X
+        "Calcium" : 42.96
+        "Potassium" : 50.05
+        "Magnesium" : 10.01
+        "Iron" : 5
+
+```
+
 ## Version 0.0.6
 
 - Added basic functionality to create a 'userjourney'

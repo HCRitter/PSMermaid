@@ -1,7 +1,9 @@
 # PSMermaid
 
 Easily Create Mermaid Markdown Files in PowerShell
+
 A large list with examples you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/EXAMPLES.md).
+
 The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blob/main/CHANGELOG.md).
 
 ## Implementation overview
@@ -9,17 +11,24 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [x] Graph / FlowChart
 - [x] Class Diagram
 - [x] User Journey
+- [x] Pie Chart
 - [ ] Sequence Diagram
 - [ ] State Diagram
 - [ ] Entity Relationship Diagrams
 - [ ] Beta Testing
 - [ ] Gantt
-- [ ] Pie Chart
 - [ ] Quadrant Chart
 - [ ] Requirement Diagram
 
 ## Changelog
 
+### Version 0.0.7
+
+#### Changes
+
+- Added basic functionality to create a 'pie chart'
+- Following new functions: 'New-MermaidPie','New-MermaidPieDataSet' created
+  
 ### Version 0.0.6
 
 #### Changes
@@ -267,4 +276,34 @@ journey
         section Go home
                 Go downstairs: 5: Me
                 Sit down: 5: Me
+```
+
+### Creating a Pie Chart in one big step
+
+```powershell
+New-MermaidPie -Title "Key elements in Product X" -ShowData -DataSet @(
+    $(
+        New-MermaidPieDataSet -Name Calcium -Value 42.96
+    ),
+    $(
+        New-MermaidPieDataSet -Name Potassium -Value 50.05
+    ),
+    $(
+        New-MermaidPieDataSet -Name Magnesium -Value 10.01
+    ),
+    $(
+        New-MermaidPieDataSet -Name Iron -Value 5
+    )
+)
+```
+
+```mermaid
+%%{init: {"pie": {"textPosition": 0.5}, "themeVariables": {"pieOuterStrokeWidth": "5px"}} }%%
+pie showData
+        title Key elements in Product X
+        "Calcium" : 42.96
+        "Potassium" : 50.05
+        "Magnesium" : 10.01
+        "Iron" : 5
+
 ```

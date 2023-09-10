@@ -180,3 +180,19 @@ New-MermaidJourney -Title "My working day" -Section @(
         )
     )
 )
+
+# Create a Pie Chart
+New-MermaidPie -Title "Key elements in Product X" -ShowData -DataSet @(
+    $(
+        New-MermaidPieDataSet -Name Calcium -Value 42.96
+    ),
+    $(
+        New-MermaidPieDataSet -Name Potassium -Value 50.05
+    ),
+    $(
+        New-MermaidPieDataSet -Name Magnesium -Value 10.01
+    ),
+    $(
+        New-MermaidPieDataSet -Name Iron -Value 5
+    )
+)
