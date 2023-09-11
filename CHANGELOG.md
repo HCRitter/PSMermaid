@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 0.0.8
+
+- Added basic functionality to create a 'Timeline'
+- Following new functions: 'New-MermaidTimeLine','New-MermaidTimelineDataSet', 'New-MermaidTimelineSection','New-MermaidTimelineDirective' created
+
+```mermaid
+timeline
+        title History of Social Media Platform
+        2002 : LinkedIn
+        2004 : Facebook : Google
+        2005 : Youtube
+        2006 : Twitter
+```
+
 ## Version 0.0.7
 
 - Added basic functionality to create a 'pie chart'

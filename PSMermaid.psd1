@@ -12,7 +12,7 @@
     RootModule = 'PSMermaid.psm1'
     
     # Version number of this module.
-    ModuleVersion = '0.0.7'
+    ModuleVersion = '0.0.8'
     
     # Supported PSEditions
     CompatiblePSEditions = 'Core'
@@ -87,6 +87,10 @@
         'New-MermaidJourneyTask'
         'New-MermaidPie'
         'New-MermaidPieDataSet'
+        'New-MermaidTimeline'
+        'New-MermaidTimelineDataSet'
+        'New-MermaidTimelineDirective'
+        'New-MermaidTimelineSection'
     )
     
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

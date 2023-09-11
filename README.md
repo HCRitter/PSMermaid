@@ -14,6 +14,7 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [x] Class Diagram
 - [x] User Journey
 - [x] Pie Chart
+- [x] Timeline
 - [ ] Sequence Diagram
 - [ ] State Diagram
 - [ ] Entity Relationship Diagrams
@@ -23,6 +24,13 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [ ] Requirement Diagram
 
 ## Changelog
+
+### Version 0.0.8
+
+#### Changes
+
+- Added basic functionality to create a 'Timeline'
+- Following new functions: 'New-MermaidTimeLine','New-MermaidTimelineDataSet', 'New-MermaidTimelineSection','New-MermaidTimelineDirective' created
 
 ### Version 0.0.7
 
@@ -308,4 +316,32 @@ pie showData
         "Magnesium" : 10.01
         "Iron" : 5
 
+```
+
+### Creating a Time in one big step
+
+```powershell
+New-MermaidTimeline -Title "England's History Timeline" -Section @(
+    $(New-MermaidTimelineSection -Name "Stone Age" -DataSet @(
+        $(New-MermaidTimelineDataSet -TimePeriod "7600 BC" -Events "Britain's oldest known house was built in Orkney, Scotland"),
+        $(New-MermaidTimelineDataSet -TimePeriod "6000 BC" -Events "Sea levels rise and Britain becomes an island.<br> The people who live here are hunter-gatherers.")
+    )),
+    $(New-MermaidTimelineSection -Name "Bronze Age" -DataSet @(
+        $(New-MermaidTimelineDataSet -TimePeriod "2300 BC" -Events @("People arrive from Europe and settle in Britain. <br>They bring farming and metalworking.","New styles of pottery and ways of burying the dead appear.")),
+        $(New-MermaidTimelineDataSet -TimePeriod "2200 BC" -Events @("The last major building works are completed at Stonehenge.<br> People now bury their dead in stone circles.","The first metal objects are made in Britain.Some other nice things happen. it is a good time to be alive."))
+    ))
+)
+```
+
+```mermaid
+timeline
+        title England's History Timeline
+        section Stone Age
+                7600 BC : Britain's oldest known house was built in Orkney, Scotland
+                6000 BC : Sea levels rise and Britain becomes an island.<br> The people who live here are hunter-gatherers.
+        section Bronze Age
+                2300 BC : People arrive from Europe and settle in Britain. <br>They bring farming and metalworking. : New styles of pottery and ways of burying the 
+dead appear.
+                2200 BC : The last major building works are completed at Stonehenge.<br> People now bury their dead in stone circles. : The first metal objects are 
+made in Britain.Some other nice things happen. it is a good time to be alive.
 ```

@@ -196,3 +196,24 @@ New-MermaidPie -Title "Key elements in Product X" -ShowData -DataSet @(
         New-MermaidPieDataSet -Name Iron -Value 5
     )
 )
+
+# Create a basic Timeline
+New-MermaidTimeline -Title "History of Social Media Platform" -DataSet @(
+    $(New-MermaidTimelineDataSet -TimePeriod "2002" -Events "LinkedIn"),
+    $(New-MermaidTimelineDataSet -TimePeriod "2004" -Events @("Facebook","Google")),
+    $(New-MermaidTimelineDataSet -TimePeriod "2005" -Events "Youtube"),
+    $(New-MermaidTimelineDataSet -TimePeriod "2006" -Events "Twitter")
+)
+
+
+# Create a Timeline with sections
+New-MermaidTimeline -Title "England's History Timeline" -Section @(
+    $(New-MermaidTimelineSection -Name "Stone Age" -DataSet @(
+        $(New-MermaidTimelineDataSet -TimePeriod "7600 BC" -Events "Britain's oldest known house was built in Orkney, Scotland"),
+        $(New-MermaidTimelineDataSet -TimePeriod "6000 BC" -Events "Sea levels rise and Britain becomes an island.<br> The people who live here are hunter-gatherers.")
+    )),
+    $(New-MermaidTimelineSection -Name "Bronze Age" -DataSet @(
+        $(New-MermaidTimelineDataSet -TimePeriod "2300 BC" -Events @("People arrive from Europe and settle in Britain. <br>They bring farming and metalworking.","New styles of pottery and ways of burying the dead appear.")),
+        $(New-MermaidTimelineDataSet -TimePeriod "2200 BC" -Events @("The last major building works are completed at Stonehenge.<br> People now bury their dead in stone circles.","The first metal objects are made in Britain.Some other nice things happen. it is a good time to be alive."))
+    ))
+)
