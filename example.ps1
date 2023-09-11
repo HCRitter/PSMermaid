@@ -217,3 +217,18 @@ New-MermaidTimeline -Title "England's History Timeline" -Section @(
         $(New-MermaidTimelineDataSet -TimePeriod "2200 BC" -Events @("The last major building works are completed at Stonehenge.<br> People now bury their dead in stone circles.","The first metal objects are made in Britain.Some other nice things happen. it is a good time to be alive."))
     ))
 )
+
+# Create a Quadrant Chart
+New-MermaidQuadrantChart -Title "Reach and engagement of campaigns" -XAxis $(New-MermaidQuadrantChartAxis -From "Low Reach" -To "High Reach" -Axis x) -YAxis $(New-MermaidQuadrantChartAxis -From "Low Engagement" -To "High Engagement" -Axis y) -Quadrant @(
+    $(New-MermaidQuadrantChartQuadrant -Number 1 -Text "We should expand"),
+    $(New-MermaidQuadrantChartQuadrant -Number 2 -Text "Need to promote"),
+    $(New-MermaidQuadrantChartQuadrant -Number 3 -Text "Re-evaluate"),
+    $(New-MermaidQuadrantChartQuadrant -Number 4 -Text "May be improved")
+) -DataSet @(
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.3 -YPosition 0.6 -Name "Campaign A"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.45 -YPosition 0.23 -Name "Campaign B"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.57 -YPosition 0.69 -Name "Campaign C"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.78 -YPosition 0.34 -Name "Campaign D"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.40 -YPosition 0.34 -Name "Campaign E"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.35 -YPosition 0.78 -Name "Campaign F")
+) 

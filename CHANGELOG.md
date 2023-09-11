@@ -1,5 +1,27 @@
 # Changelog
 
+## Version 0.0.9
+
+- Added basic functionality to create a 'QuardrantChart'
+- Following new functions: 'New-MermaidQuadrantChart','New-MermaidQuadrantChartAxis', 'New-MermaidQuadrantChartDataSet','New-MermaidQuadrantChartQuadrant' created
+
+```mermaid
+quadrantChart
+        title Reach and engagement of campaigns
+        x-axis Low Reach --> High Reach
+        y-axis Low Engagement --> High Engagement
+        quadrant-1 We should expand
+        quadrant-2 Need to promote
+        quadrant-3 Re-evaluate
+        quadrant-4 May be improved
+        Campaign A: [0.3, 0.6]
+        Campaign B: [0.45, 0.23]
+        Campaign C: [0.57, 0.69]
+        Campaign D: [0.78, 0.34]
+        Campaign E: [0.4, 0.34]
+        Campaign F: [0.35, 0.78]
+```
+
 ## Version 0.0.8
 
 - Added basic functionality to create a 'Timeline'

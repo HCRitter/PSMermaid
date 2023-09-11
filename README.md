@@ -15,15 +15,22 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [x] User Journey
 - [x] Pie Chart
 - [x] Timeline
+- [x] Quadrant Chart
 - [ ] Sequence Diagram
 - [ ] State Diagram
 - [ ] Entity Relationship Diagrams
 - [ ] Beta Testing
 - [ ] Gantt
-- [ ] Quadrant Chart
 - [ ] Requirement Diagram
 
 ## Changelog
+
+### Version 0.0.9
+
+#### Changes
+
+- Added basic functionality to create a 'QuardrantChart'
+- Following new functions: 'New-MermaidQuadrantChart','New-MermaidQuadrantChartAxis', 'New-MermaidQuadrantChartDataSet','New-MermaidQuadrantChartQuadrant' created
 
 ### Version 0.0.8
 
@@ -38,20 +45,6 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 
 - Added basic functionality to create a 'pie chart'
 - Following new functions: 'New-MermaidPie','New-MermaidPieDataSet' created
-  
-### Version 0.0.6
-
-#### Changes
-
-- Added basic functionality to create a 'userjourney'
-- Following new functions: 'New-MermaidJourney','New-MermaidJourneySection','New-MermaidJourneyTask' created
-  
-### Version 0.0.5
-
-#### Changes
-
-- Added basic functionality to create ClassDiagrams
-- Following new functions: 'New-MermaidClass','New-MermaidClassDiagram','New-MermaidClassMethod','New-MermaidClassProperty','New-MermaidClassRelationShip' created
 
 ## Examples
 
@@ -344,4 +337,39 @@ timeline
 dead appear.
                 2200 BC : The last major building works are completed at Stonehenge.<br> People now bury their dead in stone circles. : The first metal objects are 
 made in Britain.Some other nice things happen. it is a good time to be alive.
+```
+
+### Creating a Quadrant Chart in one big step
+
+```powershell
+New-MermaidQuadrantChart -Title "Reach and engagement of campaigns" -XAxis $(New-MermaidQuadrantChartAxis -From "Low Reach" -To "High Reach" -Axis x) -YAxis $(New-MermaidQuadrantChartAxis -From "Low Engagement" -To "High Engagement" -Axis y) -Quadrant @(
+    $(New-MermaidQuadrantChartQuadrant -Number 1 -Text "We should expand"),
+    $(New-MermaidQuadrantChartQuadrant -Number 2 -Text "Need to promote"),
+    $(New-MermaidQuadrantChartQuadrant -Number 3 -Text "Re-evaluate"),
+    $(New-MermaidQuadrantChartQuadrant -Number 4 -Text "May be improved")
+) -DataSet @(
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.3 -YPosition 0.6 -Name "Campaign A"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.45 -YPosition 0.23 -Name "Campaign B"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.57 -YPosition 0.69 -Name "Campaign C"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.78 -YPosition 0.34 -Name "Campaign D"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.40 -YPosition 0.34 -Name "Campaign E"),
+    $(New-MermaidQuadrantChartDataSet -XPosition 0.35 -YPosition 0.78 -Name "Campaign F")
+) 
+```
+
+```mermaid
+quadrantChart
+        title Reach and engagement of campaigns
+        x-axis Low Reach --> High Reach
+        y-axis Low Engagement --> High Engagement
+        quadrant-1 We should expand
+        quadrant-2 Need to promote
+        quadrant-3 Re-evaluate
+        quadrant-4 May be improved
+        Campaign A: [0.3, 0.6]
+        Campaign B: [0.45, 0.23]
+        Campaign C: [0.57, 0.69]
+        Campaign D: [0.78, 0.34]
+        Campaign E: [0.4, 0.34]
+        Campaign F: [0.35, 0.78]
 ```
