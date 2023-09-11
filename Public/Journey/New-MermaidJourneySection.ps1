@@ -2,7 +2,7 @@ function New-MermaidJourneySection {
     [CmdletBinding()]
     param (
         $Title,
-        [string[]] $Task
+        [string[]]$Task
     )
     
     begin {
