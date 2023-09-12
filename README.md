@@ -16,14 +16,20 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [x] Pie Chart
 - [x] Timeline
 - [x] Quadrant Chart
+- [x] Entity Relationship Diagrams
 - [ ] Sequence Diagram
 - [ ] State Diagram
-- [ ] Entity Relationship Diagrams
-- [ ] Beta Testing
 - [ ] Gantt
 - [ ] Requirement Diagram
 
 ## Changelog
+
+### Version 0.1.0
+
+#### Changes
+
+- Added basic functionality to create a 'ERDiagram' (EntityRelationship-Diagram)
+- Following new functions: 'New-MermaidERDiagram','New-MermaidERDiagramEntity', 'New-MermaidERDiagramEntityAttribute','New-MermaidERDiagramRelationShip', 'New-MermaidERDiagramRelationShipType' created
 
 ### Version 0.0.9
 
@@ -355,4 +361,75 @@ New-MermaidQuadrantChart -Title "Reach and engagement of campaigns" -XAxis $(New
     $(New-MermaidQuadrantChartDataSet -XPosition 0.40 -YPosition 0.34 -Name "Campaign E"),
     $(New-MermaidQuadrantChartDataSet -XPosition 0.35 -YPosition 0.78 -Name "Campaign F")
 ) 
+```
+
+### Create a ERDiagram
+
+```powershell
+New-MermaidERDiagram -Entity @(
+    $(New-MermaidERDiagramEntity -Name "CAR" -Attribute @(
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "registrationNumber" -Key Primary ),
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "make" ),
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "model" ),
+        $(New-MermaidERDiagramEntityAttribute -Type "string[]" -Name "parts" )
+    )),
+    $(New-MermaidERDiagramEntity -Name "PERSON" -Attribute @(
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "driversLicense" -Key Primary -Comment "The license #"),
+        $(New-MermaidERDiagramEntityAttribute -Type "string(99)" -Name "firstname" -Comment "Only 99 characters are allowed"),
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "lastname"),
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "phone UK")
+        $(New-MermaidERDiagramEntityAttribute -Type "int" -Name "age")
+    )),
+    $(New-MermaidERDiagramEntity -Name "NAMED-DRIVER" -Attribute @(
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "carRegistrationNumber" -Key Primary, Foreign),
+        $(New-MermaidERDiagramEntityAttribute -Type "string" -Name "driverLicence" -Key Primary, Foreign)
+    ))
+) -Relationship @(
+    $(
+        $newMermaidERDiagramRelationShipSplat = @{
+            FirstEntityName = "CAR"
+            SecondEntityName = "NAMED-DRIVER"
+            RelationTypeLeft = $(New-MermaidERDiagramRelationShipType -Relationshiptype ExactlyOne -Direction Left)
+            RelationTypeRight = $(New-MermaidERDiagramRelationShipType -Relationshiptype ZeroOrMore -Direction Right)
+            Comment = "allows"
+        }
+        New-MermaidERDiagramRelationShip @newMermaidERDiagramRelationShipSplat
+    ),
+    $(
+        $newMermaidERDiagramRelationShipSplat = @{
+            FirstEntityName = "PERSON"
+            SecondEntityName = "NAMED-DRIVER"
+            RelationTypeLeft = $(New-MermaidERDiagramRelationShipType -Relationshiptype ExactlyOne -Direction Left)
+            RelationTypeRight = $(New-MermaidERDiagramRelationShipType -Relationshiptype ZeroOrMore -Direction Right)
+            Comment = "is"
+        }
+        New-MermaidERDiagramRelationShip @newMermaidERDiagramRelationShipSplat
+    )
+)
+```
+
+```mermaid
+erDiagram 
+        CAR {
+                string registrationNumber PK
+                string make
+                string model
+                string[] parts
+        }
+
+        PERSON {
+                string driversLicense PK "The license #"
+                string(99) firstname  "Only 99 characters are allowed"
+                string lastname
+                string phone UK
+                int age
+        }
+
+        NAMED-DRIVER {
+                string carRegistrationNumber PK,FK
+                string driverLicence PK,FK
+        }
+
+        CAR ||--o{ NAMED-DRIVER : allows
+        PERSON ||--o{ NAMED-DRIVER : is
 ```

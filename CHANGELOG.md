@@ -1,5 +1,36 @@
 # Changelog
 
+## Version 0.1.0
+
+- Added basic functionality to create a 'ERDiagram' (EntityRelationship-Diagram)
+- Following new functions: 'New-MermaidERDiagram','New-MermaidERDiagramEntity', 'New-MermaidERDiagramEntityAttribute','New-MermaidERDiagramRelationShip', 'New-MermaidERDiagramRelationShipType' created
+
+```mermaid
+erDiagram 
+        CAR {
+                string registrationNumber PK
+                string make
+                string model
+                string[] parts
+        }
+
+        PERSON {
+                string driversLicense PK "The license #"
+                string(99) firstname  "Only 99 characters are allowed"
+                string lastname
+                string phone UK
+                int age
+        }
+
+        NAMED-DRIVER {
+                string carRegistrationNumber PK,FK
+                string driverLicence PK,FK
+        }
+
+        CAR ||--o{ NAMED-DRIVER : allows
+        PERSON ||--o{ NAMED-DRIVER : is
+```
+
 ## Version 0.0.9
 
 - Added basic functionality to create a 'QuardrantChart'
