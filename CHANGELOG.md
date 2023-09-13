@@ -1,5 +1,28 @@
 # Changelog
 
+## Version 0.1.1
+
+- Added basic functionality to create a 'gitGraphs'
+- Following new functions: 'New-MermaidGitGraph', 'New-MermaidGitGraphEntry' created
+
+```mermaid
+gitGraph
+        commit id: "ZERO"
+        branch develop
+        commit id: "A"
+        checkout main
+        commit id: "ONE"
+        checkout develop
+        commit id: "B"
+        checkout main
+        commit id: "TWO"
+        cherry-pick id: "A"
+        commit id: "THREE"
+        checkout develop
+        commit id: "C"
+
+```
+
 ## Version 0.1.0
 
 - Added basic functionality to create a 'ERDiagram' (EntityRelationship-Diagram)

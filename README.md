@@ -17,6 +17,7 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [x] Timeline
 - [x] Quadrant Chart
 - [x] Entity Relationship Diagrams
+- [x] GitGraph
 - [ ] Sequence Diagram
 - [ ] State Diagram
 - [ ] Gantt
@@ -24,6 +25,13 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 
 ## Changelog
 
+### Version 0.1.1
+
+#### Changes
+
+- Added basic functionality to create a 'gitGraphs'
+- Following new functions: 'New-MermaidGitGraph', 'New-MermaidGitGraphEntry' created
+  
 ### Version 0.1.0
 
 #### Changes
@@ -432,4 +440,41 @@ erDiagram
 
         CAR ||--o{ NAMED-DRIVER : allows
         PERSON ||--o{ NAMED-DRIVER : is
+```
+
+
+### Create a Git Graph
+```powershell
+new-MermaidGitGraph -Entry @(
+    $(New-MermaidGitGraphEntryCommit -id "ZERO"),
+    $(New-MermaidGitGraphEntryBranch -Name "develop"),
+    $(New-MermaidGitGraphEntryCommit -id "A"),
+    $(New-MermaidGitGraphEntryCheckOut -name "main"),
+    $(New-MermaidGitGraphEntryCommit -id "ONE"),
+    $(New-MermaidGitGraphEntryCheckOut -name "develop"),
+    $(New-MermaidGitGraphEntryCommit -id "B"),
+    $(New-MermaidGitGraphEntryCheckOut -name "main"),
+    $(New-MermaidGitGraphEntryCommit -id "TWO"),
+    $(New-MermaidGitGraphEntryCherrypick -id "A"),
+    $(New-MermaidGitGraphEntryCommit -id "THREE"),
+    $(New-MermaidGitGraphEntryCheckOut -name "develop"),
+    $(New-MermaidGitGraphEntryCommit -id "C")
+)
+```
+
+```mermaid
+gitGraph
+        commit id: "ZERO"
+        branch develop
+        commit id: "A"
+        checkout main
+        commit id: "ONE"
+        checkout develop
+        commit id: "B"
+        checkout main
+        commit id: "TWO"
+        cherry-pick id: "A"
+        commit id: "THREE"
+        checkout develop
+        commit id: "C"
 ```

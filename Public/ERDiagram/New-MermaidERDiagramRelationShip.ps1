@@ -29,7 +29,7 @@ function New-MermaidERDiagramRelationShip {
     
     process {
         
-        $ReturnString = "{0} {1}{2}{3} {4} {5}" -f $FirstEntityName, $RelationTypeLeft, $LinkType, $RelationTypeRight, $SecondEntityName, $Comment
+        $ReturnString = "{0} {1}{2}{3} {4} {5}" -f $FirstEntityName, $RelationTypeLeft, $Script:LinkTypes[$LinkType], $RelationTypeRight, $SecondEntityName, $Comment
     }
     
     end {

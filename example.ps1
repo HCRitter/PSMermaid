@@ -276,3 +276,20 @@ New-MermaidERDiagram -Entity @(
         New-MermaidERDiagramRelationShip @newMermaidERDiagramRelationShipSplat
     )
 )
+
+# Create a Git Graph
+new-MermaidGitGraph -Entry @(
+    $(New-MermaidGitGraphEntryCommit -id "ZERO"),
+    $(New-MermaidGitGraphEntryBranch -Name "develop"),
+    $(New-MermaidGitGraphEntryCommit -id "A"),
+    $(New-MermaidGitGraphEntryCheckOut -name "main"),
+    $(New-MermaidGitGraphEntryCommit -id "ONE"),
+    $(New-MermaidGitGraphEntryCheckOut -name "develop"),
+    $(New-MermaidGitGraphEntryCommit -id "B"),
+    $(New-MermaidGitGraphEntryCheckOut -name "main"),
+    $(New-MermaidGitGraphEntryCommit -id "TWO"),
+    $(New-MermaidGitGraphEntryCherrypick -id "A"),
+    $(New-MermaidGitGraphEntryCommit -id "THREE"),
+    $(New-MermaidGitGraphEntryCheckOut -name "develop"),
+    $(New-MermaidGitGraphEntryCommit -id "C")
+)
