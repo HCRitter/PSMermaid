@@ -81,7 +81,7 @@
         'New-MermaidGraphLink',
         'New-MermaidGraphNode',
         'New-MermaidGraphNodeConnection',
-        'New-MermaidGraphStyleClassDefintion'
+        'New-MermaidGraphStyleClassDefinition'
         'New-MermaidJourney'
         'New-MermaidJourneySection'
         'New-MermaidJourneyTask'
