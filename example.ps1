@@ -293,3 +293,36 @@ new-MermaidGitGraph -Entry @(
     $(New-MermaidGitGraphEntryCheckOut -name "develop"),
     $(New-MermaidGitGraphEntryCommit -id "C")
 )
+
+
+# Create a Gantt Chart
+$topaxis='true'
+$header=@"
+---
+displayMode: compact
+config:
+    theme: base
+    themeVariables:
+    primaryColor: "#4682B4"
+gantt:
+    topAxis: $topaxis
+---
+
+"@
+
+$header
+New-MermaidGanttChart -Title "Team Absence" -Section @(
+    $(New-MermaidGanttChartSection -Title 'Bob' -Events @(
+        $(New-MermaidGanttChartEvent -Label 'Holiday' -Tag 'active' -TID 1 -StartDate '2024-08-01' -Enddate '2024-08-14'),
+        $(New-MermaidGanttChartEvent -Label 'National Holiday' -Tag 'milestone' -TID 2 -StartDate '2024-08-26' -Enddate '2024-08-27')
+    )),
+    $(New-MermaidGanttChartSection -Title 'Billy' -Events @(
+        $(New-MermaidGanttChartEvent -Label 'Holiday' -Tag 'done' -TID 1 -StartDate '2024-08-14' -Enddate '2024-08-17'),
+        $(New-MermaidGanttChartEvent -Label 'National Holiday' -Tag 'milestone' -TID 2 -StartDate '2024-08-26' -Enddate '2024-08-27')
+    )),
+    $(New-MermaidGanttChartSection -Title 'Mary' -Events @(
+        $(New-MermaidGanttChartEvent -Label 'Unapproved' -Tag 'crit' -TID 1 -StartDate '2024-08-19' -Enddate '2024-08-21'),
+        $(New-MermaidGanttChartEvent -Label 'National Holiday' -Tag 'milestone' -TID 2 -StartDate '2024-08-26' -Enddate '2024-08-27')
+    ))
+
+)

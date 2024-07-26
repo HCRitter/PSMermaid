@@ -20,10 +20,17 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 - [x] GitGraph
 - [ ] Sequence Diagram
 - [ ] State Diagram
-- [ ] Gantt
+- [x] Gantt
 - [ ] Requirement Diagram
 
 ## Changelog
+
+### Version 0.1.2
+
+#### Changes
+
+- Added basic functionality to create a 'Gantt'
+- Following new functions: 'New-MermaidGanttChart', 'New-MermaidGanttChartSection', 'New-MermaidGanttChartEvent' created
 
 ### Version 0.1.1
 
@@ -43,7 +50,7 @@ The full changelog you can find [here](https://github.com/HCRitter/PSMermaid/blo
 
 #### Changes
 
-- Added basic functionality to create a 'QuardrantChart'
+- Added basic functionality to create a 'QuadrantChart'
 - Following new functions: 'New-MermaidQuadrantChart','New-MermaidQuadrantChartAxis', 'New-MermaidQuadrantChartDataSet','New-MermaidQuadrantChartQuadrant' created
 
 ### Version 0.0.8
@@ -477,4 +484,69 @@ gitGraph
         commit id: "THREE"
         checkout develop
         commit id: "C"
+```
+
+### Create a Gantt Chart
+
+```powershell
+
+$topaxis='true'
+$header=@"
+---
+displayMode: compact
+config:
+    theme: base
+    themeVariables:
+    primaryColor: "#4682B4"
+gantt:
+    topAxis: $topaxis
+---
+
+"@
+
+$header
+New-MermaidGanttChart -Title "Team Absence" -Section @(
+    $(New-MermaidGanttChartSection -Title 'Bob' -Events @(
+        $(New-MermaidGanttChartEvent -Label 'Holiday' -Tag 'active' -TID 1 -StartDate '2024-08-01' -Enddate '2024-08-14'),
+        $(New-MermaidGanttChartEvent -Label 'National Holiday' -Tag 'milestone' -TID 2 -StartDate '2024-08-26' -Enddate '2024-08-27')
+    )),
+    $(New-MermaidGanttChartSection -Title 'Billy' -Events @(
+        $(New-MermaidGanttChartEvent -Label 'Holiday' -Tag 'done' -TID 1 -StartDate '2024-08-14' -Enddate '2024-08-17'),
+        $(New-MermaidGanttChartEvent -Label 'National Holiday' -Tag 'milestone' -TID 2 -StartDate '2024-08-26' -Enddate '2024-08-27')
+    )),
+    $(New-MermaidGanttChartSection -Title 'Mary' -Events @(
+        $(New-MermaidGanttChartEvent -Label 'Unapproved' -Tag 'crit' -TID 1 -StartDate '2024-08-19' -Enddate '2024-08-21'),
+        $(New-MermaidGanttChartEvent -Label 'National Holiday' -Tag 'milestone' -TID 2 -StartDate '2024-08-26' -Enddate '2024-08-27')
+    ))
+
+)
+```
+
+```mermaid
+---
+displayMode: compact
+config:
+    theme: dark
+    themeVariables:
+
+gantt:
+    topAxis: true
+---
+
+gantt
+        title Team Absence
+        dateFormat YYYY-MM-DD
+        excludes weekends
+        axisFormat %a%d
+ section Bob
+    Holiday : active ,1, 2024-08-01, 2024-08-14
+    National Holiday : milestone ,2, 2024-08-26, 2024-08-27
+
+ section Billy
+    Holiday : active ,1, 2024-08-14, 2024-08-17
+    National Holiday : milestone ,2, 2024-08-26, 2024-08-27
+
+ section Mary
+    Unapproved : crit ,1, 2024-08-19, 2024-08-21
+    National Holiday : milestone ,2, 2024-08-26, 2024-08-27
 ```
